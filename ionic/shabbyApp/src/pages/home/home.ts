@@ -33,7 +33,6 @@ export class HomePage {
       "name": "Garage light",
       "status": false
     }
-
   ];
 
   constructor(public navCtrl: NavController) {
