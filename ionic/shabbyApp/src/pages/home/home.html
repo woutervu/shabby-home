@@ -5,18 +5,24 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let device of devices">
-    <ion-card-header>
-      {{ device.name }}
-    </ion-card-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 *ngFor="let device of devices">
+        <ion-card>
+          <ion-card-header>
+            {{ device.name }}
+          </ion-card-header>
 
-    <ion-list>
-      <button ion-item (click)="toggleDeviceStatus(device.id)">
-        <ion-icon name="md-bulb" item-start></ion-icon>
-        Status
-        <ion-toggle checked="{{ device.status }}"></ion-toggle>
-      </button>
+          <ion-list>
+            <button ion-item (click)="toggleDeviceStatus(device.id)">
+              <ion-icon name="md-bulb" item-start></ion-icon>
+              Status
+              <ion-toggle checked="{{ device.status }}"></ion-toggle>
+            </button>
 
-    </ion-list>
-  </ion-card>
+          </ion-list>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

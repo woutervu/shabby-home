@@ -6,6 +6,7 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  // @todo: replace with real API call.
   devices = [
     {
       "id": "40cf0c30-1d98-4b5b-8814-51d112343b58",
@@ -35,7 +36,7 @@ export class HomePage {
 
   ];
 
-  constructor(public navCtrl: NavController, ) {
+  constructor(public navCtrl: NavController) {
 
   }
 
@@ -48,7 +49,6 @@ export class HomePage {
     console.log("Clicked: " + uuid);
     let index = this.devices.findIndex(i => i.id === uuid);
     this.devices[index]['status'] = !this.devices[index]['status'];
-    console.log(this.devices[index]);
   }
 
 }
