@@ -15,6 +15,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DeviceProvider } from "../providers/DeviceProvider";
 import { RoutineProvider } from "../providers/RoutineProvider";
+import { SceneProvider } from "../providers/SceneProvider";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { RoutineProvider } from "../providers/RoutineProvider";
     SplashScreen,
     DeviceProvider,
     RoutineProvider,
+    SceneProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
