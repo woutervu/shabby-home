@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SceneProvider } from "../../providers/SceneProvider";
+import { ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'page-scenes',
@@ -9,8 +10,22 @@ import { SceneProvider } from "../../providers/SceneProvider";
 export class ScenesPage {
   private scenes;
 
-  constructor(public navCtrl: NavController, private sceneProvider : SceneProvider) {
+  constructor(public navCtrl: NavController, private toastCtrl : ToastController , private sceneProvider : SceneProvider) {
     this.scenes = this.sceneProvider.scenes;
+  }
+
+  /**
+   * Click handler to activate scene.
+   * @param scene
+   */
+  public activateScene(scene) {
+    let toast = this.toastCtrl.create({
+      'message': 'Activating scene "' + scene.name + '"',
+      'duration': 3000,
+      'position': 'middle',
+    });
+    toast.present();
+    this.sceneProvider.activateScene(scene.id);
   }
 
   /**

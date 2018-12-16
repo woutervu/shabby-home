@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { DeviceProvider } from "../../providers/DeviceProvider";
+import { Events } from "ionic-angular";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  private devices = [];
+  public devices = [];
 
-  constructor(public navCtrl: NavController, private deviceProvider : DeviceProvider) {
-    this.devices = this.deviceProvider.devices;
+  constructor(public navCtrl: NavController, private deviceProvider : DeviceProvider, public events : Events) {
+     events.subscribe('devices:update', (devices) => {
+       console.log(devices);
+       this.devices = devices;
+       console.log('Updating devices.');
+     });
   }
 
   /**
@@ -26,6 +31,8 @@ export class HomePage {
    * Subscribe to the provider before enter.
    */
   ionViewWillEnter() {
+    console.log('Home view loaded');
+    this.devices = this.deviceProvider.getDevices();
     this.deviceProvider.subscribe();
   }
 

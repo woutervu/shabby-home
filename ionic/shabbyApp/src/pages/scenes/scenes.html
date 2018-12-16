@@ -7,5 +7,19 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 *ngFor="let scene of scenes">
+        <ion-card>
+          <ion-list>
+            <button ion-item (click)="activateScene(scene)">
+              <ion-icon name="{{ scene.icon }}" item-start></ion-icon>
+              {{ scene.name }}
+            </button>
 
+          </ion-list>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

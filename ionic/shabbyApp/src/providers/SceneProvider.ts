@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
+import { DeviceProvider } from "./DeviceProvider";
 
 @Injectable()
 /**
@@ -10,8 +11,17 @@ export class SceneProvider {
   public scenes = [
     {
       "id": 1,
-      "name": "Living room",
-      "devices": ["a38641e5-ecdc-44f1-a414-1119c5a0ac78", "fe4b2538-fefb-4470-bfe7-12f93e9cbf56"],
+      "name": "Going to bed",
+      "icon": "moon",
+      "devicesOn": [
+        "fe4b2538-fefb-4470-bfe7-12f93e9cbf56"
+      ],
+      "devicesOff": [
+        "40cf0c30-1d98-4b5b-8814-51d112343b58",
+        "a38641e5-ecdc-44f1-a414-1119c5a0ac78",
+        "d716220a-3139-4b2f-9526-99d7a85cb52b",
+        "cc9aab58-e563-4d64-a516-e6359831e9af",
+      ],
     }
   ];
 
@@ -23,7 +33,7 @@ export class SceneProvider {
   /**
    * SceneProvider constructor.
    */
-  constructor () {
+  constructor (private deviceProvider : DeviceProvider) {
     //
   }
 
@@ -65,5 +75,20 @@ export class SceneProvider {
     console.log("Deleting scene: " + id);
     let index = this.scenes.findIndex(i => i.id === id);
     this.scenes.splice(index, 1);
+  }
+
+  /**
+   * Activate scene.
+   * @param id
+   */
+  public activateScene(id) {
+    console.log("Activating scene: " + id);
+    let scene = this.scenes.find(i => i.id === id);
+    this.deviceProvider.turnOnDevices(scene.devicesOn);
+    this.deviceProvider.turnOffDevices(scene.devicesOff);
+    console.log('Devices (get):');
+    console.log(this.deviceProvider.getDevices());
+    console.log('Devices (var):');
+    console.log(this.deviceProvider.devices);
   }
 }

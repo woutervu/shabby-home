@@ -10,13 +10,14 @@ export class RoutinesPage {
   private routines;
 
   constructor(public navCtrl: NavController, private routineProvider : RoutineProvider) {
-    this.routines = this.routineProvider;
+    //
   }
 
   /**
    * Subscribe to the provider before enter.
    */
   ionViewWillEnter() {
+    this.routines = this.routineProvider.routines;
     this.routineProvider.subscribe();
   }
 

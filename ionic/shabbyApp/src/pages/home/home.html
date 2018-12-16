@@ -6,7 +6,7 @@
 
 <ion-content padding>
   <ion-grid>
-    <ion-row>
+    <ion-row ngModel="devices" ngDefaultControl>
       <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 *ngFor="let device of devices">
         <ion-card>
           <ion-card-header>
@@ -15,7 +15,7 @@
 
           <ion-list>
             <button ion-item (click)="toggleDeviceStatus(device.id)">
-              <ion-icon name="md-bulb" item-start></ion-icon>
+              <ion-icon name="{{ device.icon }}" item-start></ion-icon>
               Status
               <ion-toggle checked="{{ device.status }}"></ion-toggle>
             </button>

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable} from "rxjs";
+import { Events } from "ionic-angular";
 
 @Injectable()
 /**
@@ -11,26 +12,31 @@ export class DeviceProvider {
     {
       "id": "40cf0c30-1d98-4b5b-8814-51d112343b58",
       "name": "Desk light",
+      "icon": "bulb",
       "status": true
     },
     {
       "id": "a38641e5-ecdc-44f1-a414-1119c5a0ac78",
       "name": "Living room light",
+      "icon": "bulb",
       "status": false
     },
     {
       "id": "fe4b2538-fefb-4470-bfe7-12f93e9cbf56",
       "name": "Nightstand light",
+      "icon": "bulb",
       "status": false
     },
     {
       "id": "d716220a-3139-4b2f-9526-99d7a85cb52b",
-      "name": "Kitchen light",
+      "name": "Watercooker",
+      "icon": "outlet",
       "status": true
     },
     {
       "id": "cc9aab58-e563-4d64-a516-e6359831e9af",
-      "name": "Garage light",
+      "name": "Coffee machine",
+      "icon": "outlet",
       "status": false
     }
   ];
@@ -43,8 +49,8 @@ export class DeviceProvider {
   /**
    * DeviceProvider constructor. Sets up a device subscriber.
    */
-  constructor () {
-    //
+  constructor (public events : Events) {
+
   }
 
   public subscribe() {
@@ -64,7 +70,7 @@ export class DeviceProvider {
    * @todo: this will be an API call.
    */
   public getDevices() {
-    console.log('Getting devices.');
+    this.events.publish('devices:update', this.devices);
     return this.devices;
   }
 
@@ -97,14 +103,30 @@ export class DeviceProvider {
     this.devices[index]['status'] = false;
   }
 
+  public turnOffDevices(uuids) {
+    for (let uuid of uuids) {
+      this.turnOffDevice(uuid);
+    }
+  }
+
   /**
    * Turn on device by UUID.
    * @param uuid
    */
   public turnOnDevice(uuid) {
-    console.log("Turning off: " + uuid);
+    console.log("Turning on: " + uuid);
     let index = this.devices.findIndex(i => i.id === uuid);
     this.devices[index]['status'] = true;
+  }
+
+  /**
+   * Turn on devices by array with UUIDs.
+   * @param uuids
+   */
+  public turnOnDevices(uuids) {
+    for (let uuid of uuids) {
+      this.turnOnDevice(uuid);
+    }
   }
 
   /**
