@@ -8,7 +8,7 @@ import { ToastController } from 'ionic-angular';
   templateUrl: 'scenes.html'
 })
 export class ScenesPage {
-  private scenes;
+  public scenes;
 
   constructor(public navCtrl: NavController, private toastCtrl : ToastController , private sceneProvider : SceneProvider) {
     this.scenes = this.sceneProvider.scenes;

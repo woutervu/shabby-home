@@ -7,7 +7,7 @@ import { RoutineProvider } from "../../providers/RoutineProvider";
   templateUrl: 'routines.html'
 })
 export class RoutinesPage {
-  private routines;
+  public routines;
 
   constructor(public navCtrl: NavController, private routineProvider : RoutineProvider) {
     //

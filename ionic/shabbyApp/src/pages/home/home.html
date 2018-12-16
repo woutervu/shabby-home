@@ -6,18 +6,18 @@
 
 <ion-content padding>
   <ion-grid>
-    <ion-row ngModel="devices" ngDefaultControl>
-      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 *ngFor="let device of devices">
+    <ion-row>
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 *ngFor="let d of devices; let index = index;">
         <ion-card>
           <ion-card-header>
-            {{ device.name }}
+            {{ d.name }}
           </ion-card-header>
 
           <ion-list>
-            <button ion-item (click)="toggleDeviceStatus(device.id)">
-              <ion-icon name="{{ device.icon }}" item-start></ion-icon>
+            <button ion-item (click)="toggleDeviceStatus(d.id)">
+              <ion-icon name="{{ d.icon }}" item-start></ion-icon>
               Status
-              <ion-toggle checked="{{ device.status }}"></ion-toggle>
+              <ion-toggle [(ngModel)]="devices[index].status" checked="{{ d.status }}"></ion-toggle>
             </button>
 
           </ion-list>

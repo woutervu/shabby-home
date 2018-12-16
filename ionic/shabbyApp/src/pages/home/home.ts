@@ -24,6 +24,7 @@ export class HomePage {
    * @param uuid
    */
   toggleDeviceStatus(uuid) {
+    console.log('Toggle device ' + uuid);
     this.deviceProvider.toggleDeviceStatus(uuid);
   }
 
@@ -32,7 +33,7 @@ export class HomePage {
    */
   ionViewWillEnter() {
     console.log('Home view loaded');
-    this.devices = this.deviceProvider.getDevices();
+    this.devices = this.deviceProvider.devices;
     this.deviceProvider.subscribe();
   }
 
