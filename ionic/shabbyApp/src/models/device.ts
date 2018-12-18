@@ -1,4 +1,4 @@
-export class deviceModel {
+export class Device {
  
     constructor(public title: string, public items: any[]){
  
