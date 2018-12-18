@@ -11,7 +11,7 @@ import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 })
 export class HomePage {
   private deviceForm : FormGroup;
-  public devices = [];
+  public devices: any;
 
   constructor(
     public navCtrl: NavController,
