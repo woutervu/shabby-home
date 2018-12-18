@@ -8,38 +8,39 @@ import { Events } from "ionic-angular";
  */
 export class DeviceProvider {
   // @todo: replace with real API call.
-  public devices = [
+  private initialDevices = [
     {
-      "id": "40cf0c30-1d98-4b5b-8814-51d112343b58",
+      "uuid": "40cf0c30-1d98-4b5b-8814-51d112343b58",
       "name": "Desk light",
       "icon": "bulb",
       "status": true
     },
     {
-      "id": "a38641e5-ecdc-44f1-a414-1119c5a0ac78",
+      "uuid": "a38641e5-ecdc-44f1-a414-1119c5a0ac78",
       "name": "Living room light",
       "icon": "bulb",
       "status": false
     },
     {
-      "id": "fe4b2538-fefb-4470-bfe7-12f93e9cbf56",
+      "uuid": "fe4b2538-fefb-4470-bfe7-12f93e9cbf56",
       "name": "Nightstand light",
       "icon": "bulb",
       "status": false
     },
     {
-      "id": "d716220a-3139-4b2f-9526-99d7a85cb52b",
+      "uuid": "d716220a-3139-4b2f-9526-99d7a85cb52b",
       "name": "Watercooker",
       "icon": "outlet",
       "status": true
     },
     {
-      "id": "cc9aab58-e563-4d64-a516-e6359831e9af",
+      "uuid": "cc9aab58-e563-4d64-a516-e6359831e9af",
       "name": "Coffee machine",
       "icon": "outlet",
       "status": false
     }
   ];
+  private devices = [];
 
   /**
    * Instance of device subscription.
@@ -50,7 +51,8 @@ export class DeviceProvider {
    * DeviceProvider constructor. Sets up a device subscriber.
    */
   constructor (public events : Events) {
-
+    // @todo: remove once API has been implemented.
+    this.initializeDevices(this.initialDevices);
   }
 
   public subscribe() {
@@ -63,6 +65,12 @@ export class DeviceProvider {
   public unsubscribe() {
     console.log('Unsubscribing DeviceProvider.');
     this.deviceSubscription.unsubscribe();
+  }
+
+  private initializeDevices(intialDevices) {
+    intialDevices.forEach(function(device) {
+      // @todo: create new model instance of device and push to devices array.
+    });
   }
 
   /**
