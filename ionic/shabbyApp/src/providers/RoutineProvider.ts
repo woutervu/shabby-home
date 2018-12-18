@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import {Observable} from "rxjs";
+import {Device} from "../models/device";
+import {Routine} from "../models/routine";
 
 @Injectable()
 /**
@@ -7,7 +9,7 @@ import {Observable} from "rxjs";
  */
 export class RoutineProvider {
   // @todo: replace with real API call.
-  public routines = [
+  private initialRoutines = [
     {
       "id": 1,
       "name": "Daily party mode.",
@@ -26,6 +28,7 @@ export class RoutineProvider {
       "last_run": null
     }
   ];
+  private routines = [];
 
   /**
    * Instance of device subscription.
@@ -36,7 +39,8 @@ export class RoutineProvider {
    * DeviceProvider constructor. Sets up a device subscriber.
    */
   constructor () {
-    //
+    // @todo: remove once API has been implemented.
+    this.initializeRoutines(this.initialRoutines);
   }
 
   public subscribe() {
@@ -49,6 +53,13 @@ export class RoutineProvider {
   public unsubscribe() {
     console.log('Unsubscribing RoutineProvider.');
     this.routineSubscription.unsubscribe();
+  }
+
+  private initializeRoutines(initialRoutines) {
+    let self = this;
+    initialRoutines.forEach(function (routine) {
+      self.routines.push(new Routine(routine));
+    });
   }
 
   /**

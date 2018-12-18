@@ -70,9 +70,8 @@ export class DeviceProvider {
 
   private initializeDevices(intialDevices) {
     let self = this;
-    intialDevices.forEach(function(device) {
+    intialDevices.forEach(function (device) {
       self.devices.push(new Device(device));
-      // @todo: create new model instance of device and push to devices array.
     });
   }
 
