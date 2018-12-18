@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { DeviceProvider } from "./DeviceProvider";
+import {Device} from "../models/device";
+import {Scene} from "../models/scene";
 
 @Injectable()
 /**
@@ -8,7 +10,7 @@ import { DeviceProvider } from "./DeviceProvider";
  */
 export class SceneProvider {
   // @todo: replace with real API call.
-  public scenes = [
+  private initialScenes = [
     {
       "id": 1,
       "name": "Going to bed",
@@ -25,6 +27,8 @@ export class SceneProvider {
     }
   ];
 
+  private scenes = [];
+
   /**
    * Instance of scene subscription.
    */
@@ -34,7 +38,7 @@ export class SceneProvider {
    * SceneProvider constructor.
    */
   constructor (private deviceProvider : DeviceProvider) {
-    //
+    this.initializeScenes(this.initialScenes);
   }
 
   public subscribe() {
@@ -47,6 +51,13 @@ export class SceneProvider {
   public unsubscribe() {
     console.log('Unsubscribing SceneProvider.');
     this.sceneSubscription.unsubscribe();
+  }
+
+  private initializeScenes(initialScenes) {
+    let self = this;
+    initialScenes.forEach(function (scene) {
+      self.scenes.push(new Scene(scene));
+    });
   }
 
   /**
