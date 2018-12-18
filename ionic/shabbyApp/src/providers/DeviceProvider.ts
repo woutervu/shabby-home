@@ -71,7 +71,9 @@ export class DeviceProvider {
   private initializeDevices(intialDevices) {
     let self = this;
     intialDevices.forEach(function (device) {
-      self.devices.push(new Device(device));
+      let newDevice = new Device(device);
+      console.log("New device: " + JSON.stringify(newDevice));
+      self.devices.push(newDevice);
     });
   }
 
@@ -81,6 +83,7 @@ export class DeviceProvider {
    */
   public getDevices() {
     this.events.publish('devices:update', this.devices);
+    console.log("devices: " + this.devices)
     return this.devices;
   }
 
@@ -145,8 +148,9 @@ export class DeviceProvider {
    */
   public toggleDeviceStatus(uuid) {
     console.log("Toggling: " + uuid);
-    let index = this.devices.findIndex(i => i.id === uuid);
-    this.devices[index]['status'] = !this.devices[index]['status'];
+    let index = this.devices.findIndex(device => device.uuid === uuid);
+    this.devices[index]['status'] = ! this.devices[index]['status'];
+    console.log("Device: " + JSON.stringify(this.devices[index]));
   }
 
   public turnOnAllDevices() {
@@ -160,6 +164,4 @@ export class DeviceProvider {
       device['status'] = false;
     });
   }
-
-
 }
