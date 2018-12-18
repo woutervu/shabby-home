@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable} from "rxjs";
 import { Events } from "ionic-angular";
+import { Device } from "../models/device";
 
 @Injectable()
 /**
@@ -68,7 +69,9 @@ export class DeviceProvider {
   }
 
   private initializeDevices(intialDevices) {
+    let self = this;
     intialDevices.forEach(function(device) {
+      self.devices.push(new Device(device));
       // @todo: create new model instance of device and push to devices array.
     });
   }
