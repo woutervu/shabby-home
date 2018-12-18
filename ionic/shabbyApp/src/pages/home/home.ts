@@ -51,7 +51,7 @@ export class HomePage {
    */
   ionViewWillEnter() {
     console.log('Home view loaded');
-    this.devices = this.deviceProvider.devices;
+    this.devices = this.deviceProvider.getDevices();
     this.deviceProvider.subscribe();
   }
 

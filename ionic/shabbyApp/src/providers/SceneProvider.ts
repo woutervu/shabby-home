@@ -100,6 +100,6 @@ export class SceneProvider {
     console.log('Devices (get):');
     console.log(this.deviceProvider.getDevices());
     console.log('Devices (var):');
-    console.log(this.deviceProvider.devices);
+    console.log(this.deviceProvider.getDevices());
   }
 }
