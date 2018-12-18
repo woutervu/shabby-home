@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import {Observable} from "rxjs";
-import {Device} from "../models/device";
 import {Routine} from "../models/routine";
 
 @Injectable()

@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { DeviceProvider } from "./DeviceProvider";
-import {Device} from "../models/device";
 import {Scene} from "../models/scene";
 
 @Injectable()
