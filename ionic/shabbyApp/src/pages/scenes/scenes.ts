@@ -11,7 +11,7 @@ export class ScenesPage {
   public scenes;
 
   constructor(public navCtrl: NavController, private toastCtrl : ToastController , private sceneProvider : SceneProvider) {
-    this.scenes = this.sceneProvider.scenes;
+    this.scenes = this.sceneProvider.getScenes();
   }
 
   /**

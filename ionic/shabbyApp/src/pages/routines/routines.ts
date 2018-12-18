@@ -17,7 +17,7 @@ export class RoutinesPage {
    * Subscribe to the provider before enter.
    */
   ionViewWillEnter() {
-    this.routines = this.routineProvider.routines;
+    this.routines = this.routineProvider.getRoutines();
     this.routineProvider.subscribe();
   }
 
