@@ -1,15 +1,13 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Scenes
-    </ion-title>
+    <ion-title>Scenes</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 *ngFor="let scene of scenes">
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 *ngFor="let scene of scenes; let index = index">
         <ion-card>
           <ion-list>
             <button ion-item (click)="activateScene(scene)">
@@ -21,8 +19,8 @@
         </ion-card>
       </ion-col>
     </ion-row>
-    <ion-fab bottom right>
-      <button ion-fab>+</button>
-    </ion-fab>
   </ion-grid>
+  <ion-fab bottom right>
+    <button ion-fab mini>+</button>
+  </ion-fab>
 </ion-content>

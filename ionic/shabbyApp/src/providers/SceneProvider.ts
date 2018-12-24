@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Scene } from "../models/scene";
+import { Events } from "ionic-angular";
 import { DeviceProvider } from "./DeviceProvider";
-import {Scene} from "../models/scene";
 
 @Injectable()
 /**
@@ -36,7 +37,7 @@ export class SceneProvider {
   /**
    * SceneProvider constructor.
    */
-  constructor (private deviceProvider : DeviceProvider) {
+  constructor (private deviceProvider : DeviceProvider, public events : Events) {
     this.initializeScenes(this.initialScenes);
   }
 
@@ -55,7 +56,8 @@ export class SceneProvider {
   private initializeScenes(initialScenes) {
     let self = this;
     initialScenes.forEach(function (scene) {
-      self.scenes.push(new Scene(scene));
+      let newScene = new Scene(scene);
+      self.scenes.push(newScene);
     });
   }
 
@@ -65,6 +67,8 @@ export class SceneProvider {
    */
   public getScenes() {
     console.log('Getting all scenes.');
+    this.events.publish('scenes:update', this.scenes);
+    console.log('scenes:' + this.scenes);
     return this.scenes;
   }
 

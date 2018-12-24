@@ -68,9 +68,9 @@ export class DeviceProvider {
     this.deviceSubscription.unsubscribe();
   }
 
-  private initializeDevices(intialDevices) {
+  private initializeDevices(initialDevices) {
     let self = this;
-    intialDevices.forEach(function (device) {
+    initialDevices.forEach(function (device) {
       let newDevice = new Device(device);
       console.log("New device: " + JSON.stringify(newDevice));
       self.devices.push(newDevice);
@@ -83,7 +83,7 @@ export class DeviceProvider {
    */
   public getDevices() {
     this.events.publish('devices:update', this.devices);
-    console.log("devices: " + this.devices)
+    console.log("devices: " + this.devices);
     return this.devices;
   }
 

@@ -37,7 +37,7 @@ export class Device {
     } 
  
     constructor(device: {}) {
-        for (var setting in device) {
+        for (let setting in device) {
 
             // Continue loop if the key(setting) is from a prototype object (bullshit)
             if (!device.hasOwnProperty(setting)) {
