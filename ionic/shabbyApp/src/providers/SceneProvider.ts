@@ -12,7 +12,7 @@ export class SceneProvider {
   // @todo: replace with real API call.
   private initialScenes = [
     {
-      "id": 1,
+      "uuid": "6b7ba300-07c4-11e9-b568-0800200c9a66",
       "name": "Going to bed",
       "icon": "moon",
       "devicesOn": [
@@ -73,36 +73,30 @@ export class SceneProvider {
   }
 
   /**
-   * Get scene by ID.
-   * @param id
+   * Get scene by UUID.
+   * @param uuid
    */
-  public getScene(id) {
-    console.log("Getting scene: " + id);
-    return this.scenes.find(i => i.id === id);
+  public getScene(uuid) {
+    console.log("Getting scene: " + uuid);
+    return this.scenes.find(i => i.uuid === uuid);
   }
 
   /**
    * Delete scene by ID.
-   * @param id
+   * @param uuid
    */
-  public deleteScene(id) {
-    console.log("Deleting scene: " + id);
-    let index = this.scenes.findIndex(i => i.id === id);
+  public deleteScene(uuid) {
+    console.log("Deleting scene: " + uuid);
+    let index = this.scenes.findIndex(i => i.uuid === uuid);
     this.scenes.splice(index, 1);
   }
 
   /**
    * Activate scene.
-   * @param id
+   * @param scene
    */
-  public activateScene(id) {
-    console.log("Activating scene: " + id);
-    let scene = this.scenes.find(i => i.id === id);
+  public activateScene(scene) {
     this.deviceProvider.turnOnDevices(scene.devicesOn);
     this.deviceProvider.turnOffDevices(scene.devicesOff);
-    console.log('Devices (get):');
-    console.log(this.deviceProvider.getDevices());
-    console.log('Devices (var):');
-    console.log(this.deviceProvider.getDevices());
   }
 }

@@ -7,22 +7,22 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 *ngFor="let device of devices; let index = index;">
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 *ngFor="let device of devices">
         <ion-card>
           <ion-card-header>
             {{ device.name }}
           </ion-card-header>
           <ion-list>
-            <button ion-item (click)="toggleDeviceStatus(device.uuid)">
+            <button ion-item (click)="toggleDeviceStatus(device)">
               <ion-icon name="{{ device.icon }}" item-start></ion-icon>
-              <ion-toggle [(ngModel)]="devices[index].status" checked="{{ device.status }}"></ion-toggle>
+              <ion-toggle [(ngModel)]="device.status" checked="{{ device.status }}"></ion-toggle>
             </button>
           </ion-list>
         </ion-card>
       </ion-col>
     </ion-row>    
   </ion-grid>
-  <ion-fab bottom right>
+  <ion-fab bottom right (click)="getDevices()">
     <button ion-fab mini>+</button>
   </ion-fab>
 </ion-content>

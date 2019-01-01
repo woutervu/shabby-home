@@ -52,19 +52,19 @@ export class DeviceProvider {
    * DeviceProvider constructor. Sets up a device subscriber.
    */
   constructor (public events : Events) {
-    // @todo: remove once API has been implemented.
     this.initializeDevices(this.initialDevices);
+    events.subscribe('devices:update', (devices) => {
+      this.updateDevices(devices);
+    });
   }
 
   public subscribe() {
-    console.log('Subscribing DeviceProvider.');
     this.deviceSubscription = Observable.interval(5000).subscribe(x => {
       this.getDevices();
     });
   }
 
   public unsubscribe() {
-    console.log('Unsubscribing DeviceProvider.');
     this.deviceSubscription.unsubscribe();
   }
 
@@ -72,7 +72,6 @@ export class DeviceProvider {
     let self = this;
     initialDevices.forEach(function (device) {
       let newDevice = new Device(device);
-      console.log("New device: " + JSON.stringify(newDevice));
       self.devices.push(newDevice);
     });
   }
@@ -83,7 +82,6 @@ export class DeviceProvider {
    */
   public getDevices() {
     this.events.publish('devices:update', this.devices);
-    console.log("devices: " + this.devices);
     return this.devices;
   }
 
@@ -93,7 +91,7 @@ export class DeviceProvider {
    */
   public getDevice(uuid) {
     console.log("Getting device: " + uuid);
-    return this.devices.find(i => i.id === uuid);
+    return this.devices.find(i => i.uuid === uuid);
   }
 
   /**
@@ -116,9 +114,11 @@ export class DeviceProvider {
     this.devices[index]['status'] = false;
   }
 
-  public turnOffDevices(uuids) {
-    for (let uuid of uuids) {
-      this.turnOffDevice(uuid);
+  public turnOffDevices(devices) {
+    console.log('Turning off devices.');
+    console.log(devices);
+    for (let device of devices) {
+      device.status(false);
     }
   }
 
@@ -136,21 +136,21 @@ export class DeviceProvider {
    * Turn on devices by array with UUIDs.
    * @param uuids
    */
-  public turnOnDevices(uuids) {
-    for (let uuid of uuids) {
-      this.turnOnDevice(uuid);
+  public turnOnDevices(devices) {
+    console.log('Turning on devices.');
+    console.log(devices);
+    for (let device of devices) {
+      device.status(true);
     }
   }
 
   /**
    * Toggle device status.
-   * @param uuid
+   * @param device
    */
-  public toggleDeviceStatus(uuid) {
-    console.log("Toggling: " + uuid);
-    let index = this.devices.findIndex(device => device.uuid === uuid);
-    this.devices[index]['status'] = ! this.devices[index]['status'];
-    console.log("Device: " + JSON.stringify(this.devices[index]));
+  public toggleDeviceStatus(device) {
+    console.log("Toggling: " + device);
+    device.status(!device.status);
   }
 
   public turnOnAllDevices() {
@@ -162,6 +162,18 @@ export class DeviceProvider {
   public turnOffAllDevices() {
     this.devices.forEach(function (device) {
       device['status'] = false;
+    });
+  }
+
+  public updateDevices(devices) {
+    let self = this;
+    devices.forEach(function(device) {
+      let localDevice = self.devices.filter(localDevice => localDevice.uuid === device.uuid);
+      if (localDevice !== device) {
+        console.log('Device changed.');
+        console.log(localDevice);
+        console.log(device);
+      }
     });
   }
 }

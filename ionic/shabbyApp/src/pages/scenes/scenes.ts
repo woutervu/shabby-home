@@ -1,16 +1,28 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SceneProvider } from "../../providers/SceneProvider";
+import { DeviceProvider } from "../../providers/DeviceProvider";
 import { ToastController } from 'ionic-angular';
+import {Events} from "ionic-angular";
 
 @Component({
   selector: 'page-scenes',
-  templateUrl: 'scenes.html'
+  templateUrl: 'scenes.html',
+  providers: [SceneProvider, DeviceProvider],
 })
 export class ScenesPage {
-  public scenes;
+  public scenes: any;
 
-  constructor(public navCtrl: NavController, private toastCtrl : ToastController , private sceneProvider : SceneProvider) {
+  constructor(
+    public navCtrl: NavController,
+    private toastCtrl : ToastController,
+    private sceneProvider : SceneProvider,
+    private deviceProvider : DeviceProvider,
+    public events : Events,
+  ) {
+    events.subscribe('scenes:update', (scenes) => {
+      this.scenes = scenes;
+    });
     this.scenes = this.sceneProvider.getScenes();
   }
 
@@ -25,7 +37,13 @@ export class ScenesPage {
       'position': 'middle',
     });
     toast.present();
-    this.sceneProvider.activateScene(scene.id);
+    this.sceneProvider.activateScene(scene);
+  }
+
+  public getDevices() {
+    this.deviceProvider.getDevices().forEach(function(device) {
+      console.log("UUID:" + device.uuid + "(status: " + device.status + '');
+    });
   }
 
   /**

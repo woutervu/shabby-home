@@ -1,49 +1,35 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { DeviceProvider } from "../../providers/DeviceProvider";
-import { Events } from "ionic-angular";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import {Component, DoCheck, SimpleChanges} from '@angular/core';
+import {Events, NavController} from 'ionic-angular';
+import {DeviceProvider} from "../../providers/DeviceProvider";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
   providers: [DeviceProvider],
 })
-export class HomePage {
-  private deviceForm : FormGroup;
+export class HomePage implements DoCheck {
   public devices: any;
-
   constructor(
     public navCtrl: NavController,
     private deviceProvider : DeviceProvider,
     public events : Events,
-    private fb: FormBuilder
   ) {
      events.subscribe('devices:update', (devices) => {
-       console.log(devices);
        this.devices = devices;
-       console.log('Updating devices.');
      });
   }
-
-  // @todo: WIP, might need it for proper model binding.
-  ngOnInit() {
-    this.deviceForm = new FormGroup({
-      name: new FormControl(),
-      icon: new FormControl(),
-      status: new FormControl(),
-    });
-    console.log(this.deviceForm);
-  }
-
   /**
    * Toggle device status.
-   *
-   * @param uuid
+   * @param device
    */
-  toggleDeviceStatus(uuid) {
-    console.log('Toggle device ' + uuid);
-    this.deviceProvider.toggleDeviceStatus(uuid);
+  public toggleDeviceStatus(device) {
+    device.status = !device.status;
+  }
+
+  public getDevices() {
+    this.deviceProvider.getDevices().forEach(function(device) {
+      console.log("UUID:" + device.uuid + "(status: " + device.status + ')');
+    });
   }
 
   /**
@@ -52,6 +38,7 @@ export class HomePage {
   ionViewWillEnter() {
     console.log('Home view loaded');
     this.devices = this.deviceProvider.getDevices();
+    console.log(this.devices);
     this.deviceProvider.subscribe();
   }
 
@@ -60,6 +47,11 @@ export class HomePage {
    */
   ionViewWillLeave() {
     this.deviceProvider.unsubscribe();
+  }
+
+  ngDoCheck(): void {
+    console.log('Changes detected.');
+    this.events.publish('devices:update', this.devices);
   }
 
 }

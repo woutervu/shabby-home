@@ -7,7 +7,7 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 *ngFor="let scene of scenes; let index = index">
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 *ngFor="let scene of scenes">
         <ion-card>
           <ion-list>
             <button ion-item (click)="activateScene(scene)">
@@ -20,7 +20,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-fab bottom right>
+  <ion-fab bottom right (click)="getDevices()">
     <button ion-fab mini>+</button>
   </ion-fab>
 </ion-content>
