@@ -1,4 +1,4 @@
-import {Component, DoCheck, SimpleChanges} from '@angular/core';
+import {Component, DoCheck } from '@angular/core';
 import {Events, NavController} from 'ionic-angular';
 import {DeviceProvider} from "../../providers/DeviceProvider";
 

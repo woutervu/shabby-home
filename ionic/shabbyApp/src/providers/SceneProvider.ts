@@ -42,14 +42,12 @@ export class SceneProvider {
   }
 
   public subscribe() {
-    console.log('Subscribing SceneProvider.');
     this.sceneSubscription = Observable.interval(5000).subscribe(x => {
       this.getScenes();
     });
   }
 
   public unsubscribe() {
-    console.log('Unsubscribing SceneProvider.');
     this.sceneSubscription.unsubscribe();
   }
 
@@ -66,7 +64,6 @@ export class SceneProvider {
    * @todo: this will be an API call.
    */
   public getScenes() {
-    console.log('Getting all scenes.');
     this.events.publish('scenes:update', this.scenes);
     console.log('scenes:' + this.scenes);
     return this.scenes;
@@ -77,7 +74,6 @@ export class SceneProvider {
    * @param uuid
    */
   public getScene(uuid) {
-    console.log("Getting scene: " + uuid);
     return this.scenes.find(i => i.uuid === uuid);
   }
 
@@ -86,7 +82,6 @@ export class SceneProvider {
    * @param uuid
    */
   public deleteScene(uuid) {
-    console.log("Deleting scene: " + uuid);
     let index = this.scenes.findIndex(i => i.uuid === uuid);
     this.scenes.splice(index, 1);
   }

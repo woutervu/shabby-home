@@ -90,8 +90,7 @@ export class DeviceProvider {
    * @param uuid
    */
   public getDevice(uuid) {
-    console.log("Getting device: " + uuid);
-    return this.devices.find(i => i.uuid === uuid);
+    return this.devices.filter(localDevice => localDevice.uuid === uuid)[0];
   }
 
   /**
@@ -99,37 +98,15 @@ export class DeviceProvider {
    * @param uuid
    */
   public getDeviceStatus(uuid) {
-    console.log("Getting device status: " + uuid);
     let device = this.devices.find(i => i.id === uuid);
     return device['status'];
   }
 
-  /**
-   * Turn off device by UUID.
-   * @param uuid
-   */
-  public turnOffDevice(uuid) {
-    console.log("Turning off: " + uuid);
-    let index = this.devices.findIndex(i => i.id === uuid);
-    this.devices[index]['status'] = false;
-  }
-
   public turnOffDevices(devices) {
-    console.log('Turning off devices.');
-    console.log(devices);
-    for (let device of devices) {
-      device.status(false);
+    for (let uuid of devices) {
+      let device = this.getDevice(uuid);
+      // device.status(false);
     }
-  }
-
-  /**
-   * Turn on device by UUID.
-   * @param uuid
-   */
-  public turnOnDevice(uuid) {
-    console.log("Turning on: " + uuid);
-    let index = this.devices.findIndex(i => i.id === uuid);
-    this.devices[index]['status'] = true;
   }
 
   /**
@@ -137,10 +114,11 @@ export class DeviceProvider {
    * @param uuids
    */
   public turnOnDevices(devices) {
-    console.log('Turning on devices.');
-    console.log(devices);
-    for (let device of devices) {
-      device.status(true);
+    for (let uuid of devices) {
+      let device = this.getDevice(uuid);
+      console.log('device');
+      console.log(device);
+      // device.status(true);
     }
   }
 
@@ -149,7 +127,6 @@ export class DeviceProvider {
    * @param device
    */
   public toggleDeviceStatus(device) {
-    console.log("Toggling: " + device);
     device.status(!device.status);
   }
 
@@ -167,13 +144,13 @@ export class DeviceProvider {
 
   public updateDevices(devices) {
     let self = this;
-    devices.forEach(function(device) {
-      let localDevice = self.devices.filter(localDevice => localDevice.uuid === device.uuid);
-      if (localDevice !== device) {
-        console.log('Device changed.');
-        console.log(localDevice);
-        console.log(device);
-      }
-    });
+    if (devices) {
+      devices.forEach(function(device) {
+        let localDevice = self.devices.filter(localDevice => localDevice.uuid === device.uuid)[0];
+        if (localDevice !== device) {
+          // Update device.
+        }
+      });
+    }
   }
 }
