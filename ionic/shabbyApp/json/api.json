@@ -1,0 +1,75 @@
+{
+  "devices": [
+    {
+      "id": 1,
+      "uuid": "40cf0c30-1d98-4b5b-8814-51d112343b58",
+      "name": "Desk light",
+      "icon": "bulb",
+      "status": true
+    },
+    {
+      "id": 2,
+      "uuid": "a38641e5-ecdc-44f1-a414-1119c5a0ac78",
+      "name": "Living room light",
+      "icon": "bulb",
+      "status": false
+    },
+    {
+      "id": 2,
+      "uuid": "fe4b2538-fefb-4470-bfe7-12f93e9cbf56",
+      "name": "Nightstand light",
+      "icon": "bulb",
+      "status": false
+    },
+    {
+      "id": 3,
+      "uuid": "d716220a-3139-4b2f-9526-99d7a85cb52b",
+      "name": "Watercooker",
+      "icon": "outlet",
+      "status": true
+    },
+    {
+      "id": 4,
+      "uuid": "cc9aab58-e563-4d64-a516-e6359831e9af",
+      "name": "Coffee machine",
+      "icon": "outlet",
+      "status": false
+    }
+  ],
+  "routines": [
+    {
+      "id": 1,
+      "name": "Daily party mode.",
+      "target_device": "a38641e5-ecdc-44f1-a414-1119c5a0ac78",
+      "type": "daily",
+      "time": "23:59",
+      "last_run": null
+    },
+    {
+      "id": 2,
+      "name": "Troll GF",
+      "target_device": "fe4b2538-fefb-4470-bfe7-12f93e9cbf56",
+      "type": "single",
+      "date": "2018-12-12T23:30:00.01",
+      "time": "23:10",
+      "last_run": null
+    }
+  ],
+  "scenes": [
+    {
+      "id": 1,
+      "uuid": "6b7ba300-07c4-11e9-b568-0800200c9a66",
+      "name": "Going to bed",
+      "icon": "moon",
+      "devicesOn": [
+        "fe4b2538-fefb-4470-bfe7-12f93e9cbf56"
+      ],
+      "devicesOff": [
+        "40cf0c30-1d98-4b5b-8814-51d112343b58",
+        "a38641e5-ecdc-44f1-a414-1119c5a0ac78",
+        "d716220a-3139-4b2f-9526-99d7a85cb52b",
+        "cc9aab58-e563-4d64-a516-e6359831e9af"
+      ]
+    }
+  ]
+}
